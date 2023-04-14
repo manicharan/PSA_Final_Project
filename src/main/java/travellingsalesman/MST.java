@@ -1,10 +1,6 @@
 package travellingsalesman;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class MST {
@@ -49,4 +45,17 @@ public class MST {
 	        return mst;
 	    }
 
+	public static HashSet<Integer> findOddDegreeVertices(Graph mst,Graph graph) {
+		HashSet<Integer> oddVertices = new HashSet<>();
+		for (int i = 0; i < mst.getNumVertices(); i++) {
+//            System.out.println("-------------------------------------------");
+			Vertex v=mst.getVertex(i);
+			int deg= mst.getDegree(v.getId());
+			if (mst.getDegree(mst.getVertex(i).getId()) % 2 == 1) {
+//                System.out.println("Degree " +i+" "+mst.getDegree(mst.getVertex(i).getId()));
+				oddVertices.add(graph.getIndex(mst.getVertex(i).getId()));
+			}
+		}
+		return oddVertices;
+	}
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 
 import java.io.*;
+import java.util.HashSet;
 
 public class TSP {
 
@@ -52,6 +53,9 @@ public class TSP {
             System.out.println(edge +" Edges: "+graph.getIndex(edge.getU().getId())+" "+graph.getIndex(edge.getV().getId()));
         }
         System.out.println("Weight of MST " + weight);
+
+		HashSet<Integer> oddVertices = MST.findOddDegreeVertices(mst,graph);
+		System.out.println("Odd-degree vertices: "+" "+oddVertices.size() +" "+ oddVertices);
         
 	}
 
