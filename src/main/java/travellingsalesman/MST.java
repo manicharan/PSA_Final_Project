@@ -58,4 +58,43 @@ public class MST {
 		}
 		return oddVertices;
 	}
+
+	public static Graph findMinimumWeightPerfectMatching(HashSet<Integer> oddVertices,Graph graph) {
+		Graph matching = new Graph();
+
+        // If there are no odd degree vertices, return an empty matching
+        if (oddVertices.isEmpty()) {
+            return matching;
+        }
+
+        // Create a subgraph containing only the odd degree vertices and their edges
+        Graph oddGraph = new Graph();
+        for(int v:oddVertices){
+            oddGraph.addVertex(graph.getVertex(v));
+            matching.addVertex(graph.getVertex(v));
+        }
+        for(Edge e: graph.getEdges()){
+            if(oddVertices.contains(graph.getIndex(e.getU().getId())) &&
+                    oddVertices.contains(graph.getIndex(e.getV().getId())))
+                oddGraph.addEdge(e);
+        }
+        System.out.println(oddGraph.getNumEdges() +" "+oddGraph.getNumVertices());
+        for(Edge e:oddGraph.getEdges()){
+//            System.out.println(e);
+        }
+        List<Edge> oddEdges = oddGraph.getEdges();
+        Collections.sort(oddEdges);
+        HashSet<Vertex> oddVer = new HashSet<Vertex>();
+        for(Vertex v: oddGraph.getVertices()){
+            oddVer.add(v);
+        }
+        for(Edge e:oddEdges){
+            if(oddVer.contains(e.getU()) && oddVer.contains(e.getV())){
+                matching.addEdge(e);
+                oddVer.remove(e.getU());
+                oddVer.remove(e.getV());
+            }
+        }
+        return matching;
+	}
 }

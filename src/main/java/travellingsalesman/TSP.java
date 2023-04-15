@@ -56,6 +56,11 @@ public class TSP {
 
 		HashSet<Integer> oddVertices = MST.findOddDegreeVertices(mst,graph);
 		System.out.println("Odd-degree vertices: "+" "+oddVertices.size() +" "+ oddVertices);
+		Graph matching = MST.findMinimumWeightPerfectMatching(oddVertices,graph);
+		System.out.println("Matching Graph "+matching.getNumVertices()+" "+matching.getNumEdges());
+        for(Edge e: matching.getEdges()){
+            System.out.println(e +" Edges: "+graph.getIndex(e.getU().getId())+" "+graph.getIndex(e.getV().getId()));
+        }
         
 	}
 
