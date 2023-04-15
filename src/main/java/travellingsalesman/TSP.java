@@ -1,10 +1,9 @@
 package travellingsalesman;
 
 import java.util.ArrayList;
-
-
 import java.io.*;
 import java.util.HashSet;
+
 
 public class TSP {
 
@@ -61,6 +60,14 @@ public class TSP {
         for(Edge e: matching.getEdges()){
             System.out.println(e +" Edges: "+graph.getIndex(e.getU().getId())+" "+graph.getIndex(e.getV().getId()));
         }
+        
+//      // Combine the minimum spanning tree and the matching edges
+      Graph eulerian = Eulerian.combineGraphs(mst, matching,graph);
+//      System.out.println("----------------------------------");
+      System.out.println("Eulerian Graph " +eulerian.getNumVertices() +" "+eulerian.getNumEdges());
+      for(Edge edge: eulerian.getEdges()){
+//          System.out.println(edge +" Edges: "+graph.getIndex(edge.getU().getId())+" "+graph.getIndex(edge.getV().getId()));
+      }
         
 	}
 
