@@ -48,7 +48,6 @@ public class MST {
 	public static HashSet<Integer> findOddDegreeVertices(Graph mst,Graph graph) {
 		HashSet<Integer> oddVertices = new HashSet<>();
 		for (int i = 0; i < mst.getNumVertices(); i++) {
-//            System.out.println("-------------------------------------------");
 			Vertex v=mst.getVertex(i);
 			int deg= mst.getDegree(v.getId());
 			if (mst.getDegree(mst.getVertex(i).getId()) % 2 == 1) {
@@ -78,7 +77,7 @@ public class MST {
                     oddVertices.contains(graph.getIndex(e.getV().getId())))
                 oddGraph.addEdge(e);
         }
-        System.out.println(oddGraph.getNumEdges() +" "+oddGraph.getNumVertices());
+//        System.out.println(oddGraph.getNumEdges() +" "+oddGraph.getNumVertices());
         for(Edge e:oddGraph.getEdges()){
 //            System.out.println(e);
         }

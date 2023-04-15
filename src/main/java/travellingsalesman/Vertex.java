@@ -5,10 +5,10 @@ public class Vertex {
     private double latitude;
     private double longitude;
 
-    public Vertex(String id, double latitude, double longitude) {
+    public Vertex(String id, double longitude, double latitude) {
         this.id = id;
-        this.latitude = latitude;
         this.longitude = longitude;
+        this.latitude = latitude;
     }
 
     public String getId() {
