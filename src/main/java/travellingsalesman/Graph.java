@@ -18,7 +18,7 @@ public class Graph {
     }
 
     public Graph() {
-        this.vertices = new ArrayList<>();
+    	this.vertices = new ArrayList<>();
         this.edges = new ArrayList<>();
         this.adjList = new HashMap<>();
     }

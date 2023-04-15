@@ -1,7 +1,10 @@
 package travellingsalesman;
 
 import java.util.ArrayList;
+
+
 import java.io.*;
+import java.util.HashSet;
 
 public class TSP {
 
@@ -17,7 +20,7 @@ public class TSP {
 			String header = br.readLine();
 			while ((line = br.readLine()) != null) {
 				String[] tokens = line.split(",");
-				String id = tokens[0].substring(tokens[0].length() - 5, tokens[0].length());
+				String id = tokens[0].substring(tokens[0].length() - 6, tokens[0].length());
 				double lat = Double.parseDouble(tokens[1]);
 				double lon = Double.parseDouble(tokens[2]);
 				graph.addVertex(id, lat, lon);
@@ -40,12 +43,26 @@ public class TSP {
 			System.out.println(e + " " + graph.getIndex(e.getU().getId()) + " " + graph.getIndex(e.getV().getId()));
 		}
 		System.out.println("---------------------------------------");
+		
+		Graph mst = MST.computeMinimumWeightSpanningTree(graph);
+		
+		double weight=0.0;
+        // Print out the edges of the minimum weight spanning tree
+        for (Edge edge : mst.getEdges()) {
+            weight+=edge.getWeight();
+            System.out.println(edge +" Edges: "+graph.getIndex(edge.getU().getId())+" "+graph.getIndex(edge.getV().getId()));
+        }
+        System.out.println("Weight of MST " + weight);
+
+		HashSet<Integer> oddVertices = MST.findOddDegreeVertices(mst,graph);
+		System.out.println("Odd-degree vertices: "+" "+oddVertices.size() +" "+ oddVertices);
+        
 	}
 
 	private static double computeDistance(Vertex v1, Vertex v2) {
 		return computeDistance(v1.getLatitude(),v1.getLongitude(),v2.getLatitude(),v2.getLongitude());
 	}
-	private static double computeDistance(double lat1, double lon1, double lat2, double lon2) {
+	private static double computeDistance(double lon1, double lat1, double lon2, double lat2) {
 
 //		return Math.sqrt(Math.pow((lat2-lat1),2)+Math.pow((lon2-lon1),2));
         double R = 6371; // radius of the earth in km
