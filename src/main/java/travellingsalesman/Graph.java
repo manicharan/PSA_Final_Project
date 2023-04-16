@@ -6,11 +6,13 @@ public class Graph {
     private List<Vertex> vertices;
     private HashMap<Integer,List<Integer>> adjList;
     private List<Edge> edges;
+    private double weight;
 
     public Graph() {
     	this.vertices = new ArrayList<>();
         this.edges = new ArrayList<>();
         this.adjList = new HashMap<>();
+        this.weight=0;
     }
 
     public void addVertex(String id, double latitude, double longitude) {
@@ -24,6 +26,7 @@ public class Graph {
     public void addEdge(Vertex u, Vertex v, double weight) {
         Edge edge = new Edge(u, v, weight);
         edges.add(edge);
+        this.weight+=weight;
         int uIndex = vertices.indexOf(u);
         int vIndex = vertices.indexOf(v);
         adjList.put(uIndex,adjList.getOrDefault(uIndex,new ArrayList<>()));
@@ -66,6 +69,10 @@ public class Graph {
         }
         return degree;
     }
+    
+    public double getWeight() {
+    	return this.weight;
+    }
 
     public int getIndex(String id) {
         for (int i = 0; i < vertices.size(); i++) {
@@ -88,6 +95,7 @@ public class Graph {
         adjList.get(uIndex).add(vIndex);
         adjList.put(vIndex,adjList.getOrDefault(vIndex,new ArrayList<>()));
         adjList.get(vIndex).add(uIndex);
+        this.weight+=e.getWeight();
     }
     public static double computeDistance(Vertex v1, Vertex v2) {
 		//formula to calculate distance between two points identified by longitude and latitude
