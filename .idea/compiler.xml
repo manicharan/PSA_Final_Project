@@ -9,8 +9,5 @@
         <module name="travellingsalesman" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="travellingsalesman" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
