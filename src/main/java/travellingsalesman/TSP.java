@@ -3,6 +3,7 @@ package travellingsalesman;
 import java.util.ArrayList;
 import java.io.*;
 import java.util.HashSet;
+import java.util.List;
 
 
 public class TSP {
@@ -77,7 +78,10 @@ public class TSP {
       for(Edge edge: eulerian.getEdges()){
 //          System.out.println(edge +" Edges: "+graph.getIndex(edge.getU().getId())+" "+graph.getIndex(edge.getV().getId()));
       }
-      System.out.println("----------------Eulerian Graph ends here--------------------");        
+      System.out.println("----------------Eulerian Graph ends here--------------------");
+		List<Integer> eulerianPath = Eulerian.findEulerianCycle(eulerian);
+		System.out.println(eulerianPath);
 	}
+
 
 }
