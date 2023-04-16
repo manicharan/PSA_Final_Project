@@ -5,10 +5,17 @@ public class Vertex {
     private double latitude;
     private double longitude;
 
-    public Vertex(String id, double longitude, double latitude) {
+    private double x;
+    private double y;
+
+
+    public Vertex(String id, double longitude, double latitude, double x, double y) {
         this.id = id;
-        this.longitude = longitude;
         this.latitude = latitude;
+        this.longitude = longitude;
+        this.x = x;
+        this.y = y;
+
     }
 
     public String getId() {
@@ -21,6 +28,14 @@ public class Vertex {
 
     public double getLongitude() {
         return longitude;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
     }
 
     @Override
