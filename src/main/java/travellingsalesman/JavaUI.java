@@ -64,12 +64,12 @@ public class JavaUI extends Application {
             });
 
 
-//            HashSet<Integer> oddVertices = MST.findOddDegreeVertices(mst, graph);
-//            Graph matching = MST.findMinimumWeightPerfectMatching(oddVertices, graph);
-//
-//            Graph eulerian = Eulerian.combineGraphs(mst, matching, graph);
-//            List<Integer> eulerianPath = Eulerian.findEulerianCycle(eulerian);
-//            Eulerian.eulerianUI(eulerianPath, eulerian, gc, label2);
+            HashSet<Integer> oddVertices = MST.findOddDegreeVertices(mst, graph);
+            Graph matching = MST.findMinimumWeightPerfectMatching(oddVertices, graph);
+
+            Graph eulerian = Eulerian.combineGraphs(mst, matching, graph);
+            List<Integer> eulerianPath = Eulerian.findEulerianCycle(eulerian);
+            Eulerian.eulerianUI(eulerianPath, eulerian, gc, label2);
 
 
             timer.stop();
