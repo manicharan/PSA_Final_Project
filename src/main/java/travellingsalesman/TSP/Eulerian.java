@@ -1,11 +1,13 @@
-package travellingsalesman;
+package travellingsalesman.TSP;
 
 
 import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
-
+import travellingsalesman.graph.Edge;
+import travellingsalesman.graph.Graph;
+import travellingsalesman.graph.Vertex;
 import java.util.ArrayList;
 import java.util.List;
 

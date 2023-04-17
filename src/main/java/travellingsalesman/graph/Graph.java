@@ -1,4 +1,4 @@
-package travellingsalesman;
+package travellingsalesman.graph;
 
 import java.util.*;
 
