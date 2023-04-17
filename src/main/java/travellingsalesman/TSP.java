@@ -60,7 +60,7 @@ public class TSP {
         System.out.println(eulerianPath);
 
         // Calculate the distance of the Hamiltonian circuit
-        double distance = calculateDistance(eulerianPath,eulerian);
+        double distance = calculateDistance(eulerianPath, eulerian);
 
         // Set the best path and distance if it's the shortest found so far
         if (distance < bestDistance) {
@@ -78,14 +78,62 @@ public class TSP {
         }
         System.out.println();
         System.out.println("Shortest Distance: " + bestDistance);
+
+
+        System.out.println("----------------2 Opt Starts here--------------------");
+
+        boolean improved = true;
+        while (improved) {
+            improved = false;
+            for (int i = 1; i < bestPath.size() - 2; i++) {
+                for (int j = i + 2; j < bestPath.size() - 1; j++) {
+                    List<Integer> newPath = twoOptSwap(bestPath, i, j);
+                    double newDistance = calculateDistance(newPath, eulerian);
+                    if (newDistance < bestDistance) {
+                        bestPath = newPath;
+                        bestDistance = newDistance;
+                        improved = true;
+                    }
+                }
+            }
+        }
+
+        System.out.println("Best route size " + bestPath.size());
+        // Print the shortest path and distance
+        System.out.print("Shortest Path: ");
+        for (int i = 0; i < bestPath.size(); i++) {
+            System.out.print(graph.getIndex(graph.getVertex(bestPath.get(i)).getId()));
+            if (i < bestPath.size() - 1) {
+                System.out.print(" -> ");
+            }
+        }
+        System.out.println();
+        System.out.println("Shortest Distance: " + bestDistance);
     }
 
-    private static double calculateDistance(List<Integer> eulerianPath,Graph eulerian) {
-        double weight=0;
-        for(int i=0;i<eulerianPath.size()-1;i++){
+    public static List<Integer> twoOptSwap(List<Integer> path, int i, int j) {
+        List<Integer> newPath = new ArrayList<>();
+        // 1. take route[0] to route[i-1] and add them in order to new_route
+        for (int k = 0; k <= i - 1; k++) {
+            newPath.add(path.get(k));
+        }
+        // 2. take route[i] to route[k] and add them in reverse order to new_route
+        for (int k = j; k >= i; k--) {
+            newPath.add(path.get(k));
+        }
+        // 3. take route[k+1] to end and add them in order to new_route
+        for (int k = j + 1; k < path.size(); k++) {
+            newPath.add(path.get(k));
+        }
+        return newPath;
+    }
+
+    private static double calculateDistance(List<Integer> eulerianPath, Graph eulerian) {
+        double weight = 0;
+        for (int i = 0; i < eulerianPath.size() - 1; i++) {
             Vertex u = eulerian.getVertex(eulerianPath.get(i));
-            Vertex v = eulerian.getVertex(eulerianPath.get(i+1));
-            weight+=Graph.computeDistance(u,v);
+            Vertex v = eulerian.getVertex(eulerianPath.get(i + 1));
+            weight += Graph.computeDistance(u, v);
         }
 //        weight+=computeDistance(eulerian.getVertex(0),eulerian.getVertex(eu))
         return weight;
