@@ -1,6 +1,6 @@
-package travellingsalesman;
+package travellingsalesman.graph;
 
-class Edge implements Comparable<Edge> {
+public class Edge implements Comparable<Edge> {
     private Vertex u;
     private Vertex v;
     private double weight;

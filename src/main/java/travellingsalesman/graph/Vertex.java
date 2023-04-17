@@ -1,13 +1,11 @@
-package travellingsalesman;
+package travellingsalesman.graph;
 
 public class Vertex {
     private String id;
     private double latitude;
     private double longitude;
-
     private double x;
     private double y;
-
 
     public Vertex(String id, double longitude, double latitude, double x, double y) {
         this.id = id;
@@ -15,10 +13,17 @@ public class Vertex {
         this.longitude = longitude;
         this.x = x;
         this.y = y;
-
     }
 
-    public String getId() {
+    public Vertex(String id, double longitude, double latitude) {
+		this(id,longitude,latitude,0,0);
+	}
+    
+    public Vertex(String id) {
+		this(id,0.0,0.0);
+	}
+
+	public String getId() {
         return id;
     }
 

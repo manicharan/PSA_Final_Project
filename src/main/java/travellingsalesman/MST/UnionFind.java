@@ -1,4 +1,4 @@
-package travellingsalesman;
+package travellingsalesman.MST;
 
 public class UnionFind {
     private int[] parent;

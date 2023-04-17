@@ -1,4 +1,4 @@
-package travellingsalesman;
+package travellingsalesman.UI;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -12,6 +12,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import travellingsalesman.MST.*;
+import travellingsalesman.TSP.Eulerian;
+import travellingsalesman.Utility.*;
+import travellingsalesman.graph.*;
+
 
 import javax.swing.*;
 import java.util.HashSet;
