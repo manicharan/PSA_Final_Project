@@ -8,8 +8,8 @@ import java.util.List;
 
 public class TSP {
     public static Graph graph = new Graph();
-    private static List<Integer> bestPath;
-    private static double bestDistance = Double.MAX_VALUE;
+    static List<Integer> bestPath;
+    static double bestDistance = Double.MAX_VALUE;
 
     public static void main(String[] args) {
         String inputFile = "src/main/resources/sample.csv";
