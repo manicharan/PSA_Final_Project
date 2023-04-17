@@ -8,7 +8,7 @@ import java.util.List;
 
 public class TSP {
     public static Graph graph = new Graph();
-    private static ArrayList<Integer> bestPath;
+    private static List<Integer> bestPath;
     private static double bestDistance = Double.MAX_VALUE;
 
     public static void main(String[] args) {
@@ -58,6 +58,37 @@ public class TSP {
         System.out.println("----------------Eulerian Graph ends here--------------------");
         List<Integer> eulerianPath = Eulerian.findEulerianCycle(eulerian);
         System.out.println(eulerianPath);
+
+        // Calculate the distance of the Hamiltonian circuit
+        double distance = calculateDistance(eulerianPath,eulerian);
+
+        // Set the best path and distance if it's the shortest found so far
+        if (distance < bestDistance) {
+            bestDistance = distance;
+            bestPath = eulerianPath;
+        }
+
+        // Print the shortest path and distance
+        System.out.print("Shortest Path: ");
+        for (int i = 0; i < bestPath.size(); i++) {
+            System.out.print(graph.getIndex(graph.getVertex(bestPath.get(i)).getId()));
+            if (i < bestPath.size() - 1) {
+                System.out.print(" -> ");
+            }
+        }
+        System.out.println();
+        System.out.println("Shortest Distance: " + bestDistance);
+    }
+
+    private static double calculateDistance(List<Integer> eulerianPath,Graph eulerian) {
+        double weight=0;
+        for(int i=0;i<eulerianPath.size()-1;i++){
+            Vertex u = eulerian.getVertex(eulerianPath.get(i));
+            Vertex v = eulerian.getVertex(eulerianPath.get(i+1));
+            weight+=Graph.computeDistance(u,v);
+        }
+//        weight+=computeDistance(eulerian.getVertex(0),eulerian.getVertex(eu))
+        return weight;
     }
 
 
