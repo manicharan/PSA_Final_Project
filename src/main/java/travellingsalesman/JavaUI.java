@@ -14,6 +14,8 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import javax.swing.*;
+import java.util.HashSet;
+import java.util.List;
 
 public class JavaUI extends Application {
     @Override
@@ -57,10 +59,18 @@ public class JavaUI extends Application {
         Timer timer = new Timer(1000, null);
         timer.addActionListener((e) -> {
             Graph mst = MST.computeMinimumWeightSpanningTree(graph, gc);
-
             Platform.runLater(() -> {
                 label.setText("Length of MST : " + String.valueOf(mst.getWeight()));
             });
+
+
+//            HashSet<Integer> oddVertices = MST.findOddDegreeVertices(mst, graph);
+//            Graph matching = MST.findMinimumWeightPerfectMatching(oddVertices, graph);
+//
+//            Graph eulerian = Eulerian.combineGraphs(mst, matching, graph);
+//            List<Integer> eulerianPath = Eulerian.findEulerianCycle(eulerian);
+//            Eulerian.eulerianUI(eulerianPath, eulerian, gc, label2);
+
 
             timer.stop();
         });
