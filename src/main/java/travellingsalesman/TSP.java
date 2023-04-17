@@ -109,7 +109,68 @@ public class TSP {
         }
         System.out.println();
         System.out.println("Shortest Distance: " + bestDistance);
+        System.out.print("----------------2 Opt Ends here--------------------");
+
+
+        System.out.println();
+        System.out.println("----------------3 Opt Starts here--------------------");
+
+        boolean improved2 = true;
+        while (improved2) {
+            improved2 = false;
+            for (int i = 1; i < bestPath.size() -4; i++) {
+                for (int j = i + 2; j < bestPath.size() - 2; j++) {
+                    for (int k = j + 2; k < bestPath.size() - 1; k++) {
+                        List<Integer> newPath = threeOptSwap(bestPath, i, j, k);
+                        double newDistance = calculateDistance(newPath, eulerian);
+                        if (newDistance < bestDistance) {
+                            bestPath = newPath;
+                            bestDistance = newDistance;
+                            improved2 = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        System.out.println("Best route size " + bestPath.size());
+        // Print the shortest path and distance
+        System.out.print("Shortest Path: ");
+        for (int i = 0; i < bestPath.size(); i++) {
+            System.out.print(graph.getIndex(graph.getVertex(bestPath.get(i)).getId()));
+            if (i < bestPath.size() - 1) {
+                System.out.print(" -> ");
+            }
+        }
+        System.out.println();
+        System.out.println("Shortest Distance: " + bestDistance);
+
+        System.out.print("----------------3 Opt Ends here--------------------");
+
+
     }
+
+    public static List<Integer> threeOptSwap(List<Integer> path, int i, int j, int k) {
+        List<Integer> newPath = new ArrayList<>();
+        // 1. take route[0] to route[i-1] and add them in order to new_route
+        for (int l = 0; l < i; l++) {
+            newPath.add(path.get(l));
+        }
+        // 2. take route[i] to route[j-1] and add them in reverse order to new_route
+        for (int l = j - 1; l >= i; l--) {
+            newPath.add(path.get(l));
+        }
+        // 3. take route[j] to route[k-1] and add them in order to new_route
+        for (int l = k - 1; l >= j; l--) {
+            newPath.add(path.get(l));
+        }
+        // 4. take route[k] to end and add them in order to new_route
+        for (int l = k; l < path.size(); l++) {
+            newPath.add(path.get(l));
+        }
+        return newPath;
+    }
+
 
     public static List<Integer> twoOptSwap(List<Integer> path, int i, int j) {
         List<Integer> newPath = new ArrayList<>();
