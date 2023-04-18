@@ -67,7 +67,10 @@ public class Graph {
     }
 
     public double getWeight() {
-        return this.weight;
+        if(this.weight==0)
+            return Double.POSITIVE_INFINITY;
+        else
+            return this.weight;
     }
 
     public int getIndex(String id) {
