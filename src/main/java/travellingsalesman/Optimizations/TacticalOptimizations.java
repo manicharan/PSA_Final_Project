@@ -11,7 +11,6 @@ public class TacticalOptimizations {
 	
 	public static double twoOpt(List<Integer> bestPath,double bestDistance,Graph graph) {
 		improved=true;
-		int count=0;
 		while (improved) {
             improved = false;
             for (int i = 1; i < bestPath.size() - 2; i++) {
@@ -24,15 +23,14 @@ public class TacticalOptimizations {
                         improved = true;
                     }
                 }
-            }
-            if(count++==1000)
-            	break;
+            }            
         }
 		return bestDistance;
 	}
 	
 	public static double threeOpt(List<Integer> bestPath,double bestDistance,Graph graph) {
       improved = true;
+      int count=0;
       while (improved) {
     	  improved = false;
           for (int i = 1; i < bestPath.size() -4; i++) {
@@ -47,8 +45,11 @@ public class TacticalOptimizations {
                       }
                   }
               }
+              System.out.println("Hey");
           }
-      }
+          count++;
+          System.out.println(count);
+      }      
       return bestDistance;
 	}
 	

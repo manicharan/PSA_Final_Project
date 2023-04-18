@@ -91,8 +91,8 @@ public class TSP {
 //----------------------------------------------------------------------------------
         //Applying the 3-OPT optimization technique
         System.out.println("----------------3 Opt Starts here--------------------");
-        bestDistance=TacticalOptimizations.threeOpt(bestPath, bestDistance, eulerian);
-        printPath();
+//        bestDistance=TacticalOptimizations.threeOpt(bestPath, bestDistance, eulerian);
+//        printPath();
         System.out.println("----------------3 Opt Ends here--------------------");
 
 
