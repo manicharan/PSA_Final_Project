@@ -55,42 +55,5 @@ public class Eulerian {
         return new ArrayList<>(cycle);
     }
 
-    public static void eulerianUI(List<Integer> eulerianPath, Graph eulerian, GraphicsContext gc, Label label, Label label4, Double lengthOfMst, Color color) {
-        double weight = 0;
-        String text =  new String();
-        text = String.valueOf(label.getText());
-        for (int i = 0; i < eulerianPath.size() - 1; i++) {
-            Vertex u = eulerian.getVertex(eulerianPath.get(i));
-            Vertex v = eulerian.getVertex(eulerianPath.get(i + 1));
-            weight += Graph.computeDistance(u, v);
-
-            try {
-                Thread.sleep(30);
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
-            }
-            if (gc != null) {
-                double finalWeight = weight;
-                String finalText = text;
-                Platform.runLater(() -> {
-                    gc.setStroke(color);
-                    gc.strokeLine(u.getX(), u.getY(), v.getX(), v.getY());
-                    Platform.runLater(() -> {
-                        if (finalText.contains("Optimal"))
-                            label.setText("Length of Optimal TSP tour : " + String.valueOf(finalWeight));
-                        else
-                            label.setText("Length of TSP tour : " + String.valueOf(finalWeight));
-
-                    });
-                });
-            }
-
-        }
-        double finalWeight1 = weight;
-        Platform.runLater(() -> {
-            label4.setText("Percentage Difference :" + ((finalWeight1 / lengthOfMst) - 1) * 100);
-        });
-
-    }
 }
 
