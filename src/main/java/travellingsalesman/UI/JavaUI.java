@@ -76,7 +76,7 @@ public class JavaUI extends Application {
 
             Graph eulerian = Eulerian.combineGraphs(mst, matching, graph);
             List<Integer> eulerianPath = Eulerian.findEulerianCycle(eulerian);
-            Eulerian.eulerianUI(eulerianPath, eulerian, gc, label2, label4, mst.getWeight(), Color.BLUE);
+            tourUI(eulerianPath, eulerian, gc, label2, label4, mst.getWeight(), Color.BLUE);
 
 
             double bestDistance = Double.MAX_VALUE;
@@ -87,11 +87,11 @@ public class JavaUI extends Application {
                 bestPath = eulerianPath;
             }
             bestPath = TacticalOptimizations.twoOpt(bestPath, bestDistance, eulerian);
-            Eulerian.eulerianUI(bestPath, eulerian, gc, label3, label4, mst.getWeight(), Color.RED);
+            tourUI(bestPath, eulerian, gc, label3, label4, mst.getWeight(), Color.BLACK);
 
 
             bestPath = TacticalOptimizations.threeOpt(bestPath, bestDistance, eulerian);
-            Eulerian.eulerianUI(bestPath, eulerian, gc, label3, label4, mst.getWeight(), Color.LAVENDER);
+            tourUI(bestPath, eulerian, gc, label3, label4, mst.getWeight(), Color.RED);
 
 
 
@@ -100,6 +100,45 @@ public class JavaUI extends Application {
         timer.start();
         System.out.println(graph.getNumVertices());
     }
+
+    public static void tourUI(List<Integer> eulerianPath, Graph eulerian, GraphicsContext gc, Label label, Label label4, Double lengthOfMst, Color color) {
+        double weight = 0;
+        String text =  new String();
+        text = String.valueOf(label.getText());
+        for (int i = 0; i < eulerianPath.size() - 1; i++) {
+            Vertex u = eulerian.getVertex(eulerianPath.get(i));
+            Vertex v = eulerian.getVertex(eulerianPath.get(i + 1));
+            weight += Graph.computeDistance(u, v);
+
+            try {
+                Thread.sleep(30);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+            if (gc != null) {
+                double finalWeight = weight;
+                String finalText = text;
+                Platform.runLater(() -> {
+                    gc.setStroke(color);
+                    gc.strokeLine(u.getX(), u.getY(), v.getX(), v.getY());
+                    Platform.runLater(() -> {
+                        if (finalText.contains("Optimal"))
+                            label.setText("Length of Optimal TSP tour : " + String.valueOf(finalWeight));
+                        else
+                            label.setText("Length of TSP tour : " + String.valueOf(finalWeight));
+
+                    });
+                });
+            }
+
+        }
+        double finalWeight1 = weight;
+        Platform.runLater(() -> {
+            label4.setText("Percentage Difference :" + ((finalWeight1 / lengthOfMst) - 1) * 100);
+        });
+
+    }
+
 
     public static void main(String[] args) {
         launch();
