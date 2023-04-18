@@ -45,7 +45,7 @@ public class TacticalOptimizations {
                       }
                   }
               }
-              System.out.println("Hey");
+//              System.out.println("Hey");
           }
           count++;
           System.out.println(count);
@@ -74,7 +74,7 @@ public class TacticalOptimizations {
         return newPath;
     }
 	
-	private static List<Integer> twoOptSwap(List<Integer> path, int i, int j) {
+	public static List<Integer> twoOptSwap(List<Integer> path, int i, int j) {
 		List<Integer> newPath = new ArrayList<>();
         // 1. take route[0] to route[i-1] and add them in order to new_route
         for (int k = 0; k <= i - 1; k++) {
