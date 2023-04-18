@@ -62,14 +62,14 @@ public class TSP {
 //          System.out.println(edge +" Edges: "+graph.getIndex(edge.getU().getId())+" "+graph.getIndex(edge.getV().getId()));
 //        }
         System.out.println("----------------Eulerian Graph ends here--------------------");
-        
+
 //----------------------------------------------------------------------------------
         //Generate Euler tour by skipping repeating vertices
         System.out.println("----------------Eulerian tour starts here------------------");
         List<Integer> eulerianPath = Eulerian.findEulerianCycle(eulerian);
         System.out.println(eulerianPath);
         System.out.println("----------------Eulerian tour starts here------------------");
-        
+
 //-----------------------------------------------------------------------------------
         // Calculate the distance of the TSP tour and print the tour
         System.out.println("----------------TSP tour starts here------------------");
@@ -78,36 +78,39 @@ public class TSP {
         if (distance < bestDistance) {
             bestDistance = distance;
             bestPath = eulerianPath;
-        }        
+        }
         printPath();
         System.out.println("----------------TSP tour ends here------------------");
 
 //----------------------------------------------------------------------------------
         //Applying 2-OPT optimization technique
         System.out.println("----------------2 Opt Starts here--------------------");
-        bestDistance=TacticalOptimizations.twoOpt(bestPath, bestDistance, eulerian);
+        bestPath = TacticalOptimizations.twoOpt(bestPath, bestDistance, eulerian);
+        bestDistance = calculateDistance(bestPath, eulerian);
         printPath();
         System.out.println("------------------2 Opt Ends here--------------------");
-        
+
 //----------------------------------------------------------------------------------
         //Applying the 3-OPT optimization technique
         System.out.println("----------------3 Opt Starts here--------------------");
-        bestDistance=TacticalOptimizations.threeOpt(bestPath, bestDistance, eulerian);
-        printPath();
+//        bestPath=TacticalOptimizations.threeOpt(bestPath, bestDistance, eulerian);
+//        bestDistance = calculateDistance(bestPath, eulerian);
+//        printPath();
         System.out.println("----------------3 Opt Ends here--------------------");
 
 //----------------------------------------------------------------------------------
         //Applying the Simulated Annealing optimization technique
         System.out.println("----------------Simulated Annealing Starts here--------------------");
-        bestDistance= SimulatedAnnealing.optimize(bestPath, bestDistance, eulerian);
-        printPath();
+//        bestPath= SimulatedAnnealing.optimize(bestPath, bestDistance, eulerian);
+//        bestDistance = calculateDistance(bestPath, eulerian);
+//        printPath();
         System.out.println("----------------Simulated Annealing Ends here--------------------");
 
 
     }
 
     private static void printPath() {
-    	System.out.println("Shortest Path size "+bestPath.size());
+        System.out.println("Shortest Path size " + bestPath.size());
         for (int i = 0; i < bestPath.size(); i++) {
             System.out.print(graph.getIndex(graph.getVertex(bestPath.get(i)).getId()));
             if (i < bestPath.size() - 1) {
@@ -116,8 +119,8 @@ public class TSP {
         }
         System.out.println();
         System.out.println("Shortest Distance: " + bestDistance);
-		
-	}
+
+    }
 
     public static double calculateDistance(List<Integer> eulerianPath, Graph eulerian) {
         double weight = 0;
