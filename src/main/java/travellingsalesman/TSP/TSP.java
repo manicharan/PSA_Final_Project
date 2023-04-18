@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import travellingsalesman.MST.*;
+import travellingsalesman.Optimizations.SimulatedAnnealing;
 import travellingsalesman.Optimizations.TacticalOptimizations;
 import travellingsalesman.Utility.*;
 import travellingsalesman.graph.*;
@@ -91,9 +92,16 @@ public class TSP {
 //----------------------------------------------------------------------------------
         //Applying the 3-OPT optimization technique
         System.out.println("----------------3 Opt Starts here--------------------");
-//        bestDistance=TacticalOptimizations.threeOpt(bestPath, bestDistance, eulerian);
-//        printPath();
+        bestDistance=TacticalOptimizations.threeOpt(bestPath, bestDistance, eulerian);
+        printPath();
         System.out.println("----------------3 Opt Ends here--------------------");
+
+//----------------------------------------------------------------------------------
+        //Applying the Simulated Annealing optimization technique
+        System.out.println("----------------Simulated Annealing Starts here--------------------");
+        bestDistance= SimulatedAnnealing.optimize(bestPath, bestDistance, eulerian);
+        printPath();
+        System.out.println("----------------Simulated Annealing Ends here--------------------");
 
 
     }
