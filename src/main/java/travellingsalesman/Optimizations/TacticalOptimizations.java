@@ -9,7 +9,7 @@ import travellingsalesman.graph.Graph;
 public class TacticalOptimizations {
 	private static boolean improved;
 	
-	public static double twoOpt(List<Integer> bestPath,double bestDistance,Graph graph) {
+	public static List<Integer> twoOpt(List<Integer> bestPath,double bestDistance,Graph graph) {
 		improved=true;
 		while (improved) {
             improved = false;
@@ -25,10 +25,10 @@ public class TacticalOptimizations {
                 }
             }            
         }
-		return bestDistance;
+		return bestPath;
 	}
 	
-	public static double threeOpt(List<Integer> bestPath,double bestDistance,Graph graph) {
+	public static List<Integer> threeOpt(List<Integer> bestPath,double bestDistance,Graph graph) {
       improved = true;
       int count=0;
       while (improved) {
@@ -45,12 +45,12 @@ public class TacticalOptimizations {
                       }
                   }
               }
-              System.out.println("Hey");
+//              System.out.println("Hey");
           }
           count++;
           System.out.println(count);
       }      
-      return bestDistance;
+      return bestPath;
 	}
 	
 	public static List<Integer> threeOptSwap(List<Integer> path, int i, int j, int k) {
@@ -74,7 +74,7 @@ public class TacticalOptimizations {
         return newPath;
     }
 	
-	private static List<Integer> twoOptSwap(List<Integer> path, int i, int j) {
+	public static List<Integer> twoOptSwap(List<Integer> path, int i, int j) {
 		List<Integer> newPath = new ArrayList<>();
         // 1. take route[0] to route[i-1] and add them in order to new_route
         for (int k = 0; k <= i - 1; k++) {
