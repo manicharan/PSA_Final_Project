@@ -45,7 +45,7 @@ public class SimulatedAnnealing {
                     temperature *= COOLING_RATE;
                 }
             }
-            if(count==1000)
+            if(count==100)
             	break;
             System.out.println(count++);
         }
