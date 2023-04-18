@@ -14,13 +14,14 @@ import travellingsalesman.graph.*;
 
 public class TSP {
     public static Graph graph = new Graph();
-    public static Graph bestTour = new Graph();
+    static List<Integer> bestPath;
+    static double bestDistance = Double.MAX_VALUE;
 
     public static void main(String[] args) {
         String inputFile = "src/main/resources/sample.csv";
-//git s------------------------------------------------------------------------------------
-        ReadData.readData(inputFile, graph, null, 0, 0);
 //------------------------------------------------------------------------------------
+        ReadData.readData(inputFile, graph, null, 0, 0);
+//------------------------------------------------------------------------------------		
 
         //printing the original graph
         System.out.println("----------------Original Graph starts here------------------");
@@ -72,21 +73,21 @@ public class TSP {
 //-----------------------------------------------------------------------------------
         // Calculate the distance of the TSP tour and print the tour
         System.out.println("----------------TSP tour starts here------------------");
-        Graph initialTour = TSPTour.constructTour(eulerianPath, eulerian);
-        System.out.println(initialTour.getWeight());
+        double distance = calculateDistance(eulerianPath, eulerian);
         // Set the best path and distance to the TSP found initially
-        if (initialTour.getWeight() < bestTour.getWeight()) {
-            bestTour = initialTour;
+        if (distance < bestDistance) {
+            bestDistance = distance;
+            bestPath = eulerianPath;
         }
-        TSPTour.printPath(bestTour);
+        printPath();
         System.out.println("----------------TSP tour ends here------------------");
 
 //----------------------------------------------------------------------------------
         //Applying 2-OPT optimization technique
         System.out.println("----------------2 Opt Starts here--------------------");
-//        bestPath = TacticalOptimizations.twoOpt(bestPath, bestDistance, eulerian);
-//        bestDistance = calculateDistance(bestPath, eulerian);
-//        printPath();
+        bestPath = TacticalOptimizations.twoOpt(bestPath, bestDistance, eulerian);
+        bestDistance = calculateDistance(bestPath, eulerian);
+        printPath();
         System.out.println("------------------2 Opt Ends here--------------------");
 
 //----------------------------------------------------------------------------------
@@ -105,6 +106,19 @@ public class TSP {
 //        printPath();
         System.out.println("----------------Simulated Annealing Ends here--------------------");
 
+
+    }
+
+    private static void printPath() {
+        System.out.println("Shortest Path size " + bestPath.size());
+        for (int i = 0; i < bestPath.size(); i++) {
+            System.out.print(graph.getIndex(graph.getVertex(bestPath.get(i)).getId()));
+            if (i < bestPath.size() - 1) {
+                System.out.print(" -> ");
+            }
+        }
+        System.out.println();
+        System.out.println("Shortest Distance: " + bestDistance);
 
     }
 
