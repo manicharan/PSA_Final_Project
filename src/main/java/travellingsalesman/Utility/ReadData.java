@@ -1,6 +1,8 @@
-package travellingsalesman;
+package travellingsalesman.Utility;
 
 import javafx.scene.canvas.GraphicsContext;
+import travellingsalesman.graph.Graph;
+import travellingsalesman.graph.Vertex;
 
 import java.io.*;
 
@@ -21,7 +23,7 @@ public class ReadData {
                 double y = latitudeToY(lat, height);
                 if(gc!=null)
                 gc.fillOval(x, y, 5, 5);
-                graph.addVertex(new Vertex(tokens[0].substring(tokens[0].length()-6, tokens[0].length()), lon, lat, x, y));
+                graph.addVertex(new Vertex(id, lon, lat, x, y));
 
             }
 

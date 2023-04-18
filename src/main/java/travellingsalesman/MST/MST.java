@@ -1,7 +1,10 @@
-package travellingsalesman;
+package travellingsalesman.MST;
 
 import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
+import travellingsalesman.graph.Edge;
+import travellingsalesman.graph.Graph;
+import travellingsalesman.graph.Vertex;
 
 import java.util.*;
 
