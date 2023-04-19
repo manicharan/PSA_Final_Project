@@ -61,7 +61,7 @@ public class JavaUI extends Application {
         stage.show();
         Graph graph = new Graph();
 
-        ReadData.readData("src/main/resources/sample.csv", graph, gc, width, height);
+        ReadData.readData("src/main/resources/info6205.spring2023.teamproject.csv", graph, gc, width, height);
 
         Timer timer = new Timer(1000, null);
         timer.addActionListener((e) -> {

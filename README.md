@@ -7,7 +7,7 @@ Trying to find the shortest possile route of visiting all the cities exactly onc
 
 1) Mani Charan Reddy Loka (NUID 002727403)
 2) Nishaanth Reddy Tummalapalli (NUID 002707338)
-3) Prashant Vobilishetty (NUID 002707220)
+3) Prashanth Vobilishetty (NUID 002707220)
 
 **Instructions for cloning and running the code**
 
@@ -19,7 +19,7 @@ Trying to find the shortest possile route of visiting all the cities exactly onc
 1) Add Maven dependencies for JavaFX
 2) Download the JavaFX library from https://gluonhq.com/products/javafx/ to local folder
 3) Add the VM Argument --module-path "path to lib here" --add-modules=javafx.controls
-4) Open PSA_Final_Project\src\main\java\travellingsalesman\UI and run the application
+4) Open PSA_Final_Project\src\main\java\travellingsalesman\UI\JavaUI.java and run the application
 
 **Technologies involved**
 1) Java for Backend
