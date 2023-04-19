@@ -6,8 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 
 import travellingsalesman.MST.*;
-import travellingsalesman.Optimizations.SimulatedAnnealing;
-import travellingsalesman.Optimizations.TacticalOptimizations;
+import travellingsalesman.Optimizations.*;
+import travellingsalesman.Optimizations.AntColonyOptimization.Ant;
 import travellingsalesman.Utility.*;
 import travellingsalesman.graph.*;
 
@@ -18,7 +18,7 @@ public class TSP {
     static double bestDistance = Double.MAX_VALUE;
 
     public static void main(String[] args) {
-        String inputFile = "src/main/resources/sample.csv";
+        String inputFile = "src/main/resources/info6205.spring2023.teamproject.csv";
 //------------------------------------------------------------------------------------
         ReadData.readData(inputFile, graph, null, 0, 0);
 //------------------------------------------------------------------------------------		
@@ -101,10 +101,20 @@ public class TSP {
 //----------------------------------------------------------------------------------
         //Applying the Simulated Annealing optimization technique
         System.out.println("----------------Simulated Annealing Starts here--------------------");
-//        bestPath= SimulatedAnnealing.optimize(bestPath, bestDistance, eulerian);
-//        bestDistance = calculateDistance(bestPath, eulerian);
-//        printPath();
+        bestPath= SimulatedAnnealing.optimize(bestPath, bestDistance, eulerian);
+        bestDistance = calculateDistance(bestPath, eulerian);
+        printPath();
         System.out.println("----------------Simulated Annealing Ends here--------------------");
+        
+//----------------------------------------------------------------------------------
+        //Applying the Simulated Annealing optimization technique
+        System.out.println("----------------Ant Colony Optimization Starts here--------------------");
+        AntColonyOptimization aco = new AntColonyOptimization(70,1000,eulerian,bestPath);
+        Ant ant = aco.run(eulerian);
+        bestDistance = ant.getCost();
+        bestPath=ant.getTour();
+        printPath();
+        System.out.println("----------------Ant Colony Optimization Ends here--------------------");
 
 
     }
@@ -112,7 +122,7 @@ public class TSP {
     private static void printPath() {
         System.out.println("Shortest Path size " + bestPath.size());
         for (int i = 0; i < bestPath.size(); i++) {
-            System.out.print(graph.getIndex(graph.getVertex(bestPath.get(i)).getId()));
+            System.out.print(graph.getVertex(bestPath.get(i)).getId().substring(1));
             if (i < bestPath.size() - 1) {
                 System.out.print(" -> ");
             }
