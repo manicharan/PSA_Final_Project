@@ -14,7 +14,7 @@ public class SimulatedAnnealing {
     private static final double COOLING_RATE = 0.999;
     private static final int MAX_ITERATIONS = 10000;
 
-    public static double optimize(List<Integer> bestPath, double bestDistance, Graph graph) {
+    public static List<Integer> optimize(List<Integer> bestPath, double bestDistance, Graph graph) {
         List<Integer> currentPath = new ArrayList<>(bestPath);
         double currentDistance = TSP.calculateDistance(currentPath, graph);
         double temperature = INITIAL_TEMPERATURE;
@@ -48,7 +48,7 @@ public class SimulatedAnnealing {
             	break;
             System.out.println(count++);
         }
-        return bestDistance;
+        return bestPath;
     }
 
     private static double acceptanceProbability(double currentDistance, double newDistance, double temperature) {
