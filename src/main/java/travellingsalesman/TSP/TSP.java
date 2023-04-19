@@ -107,7 +107,7 @@ public class TSP {
         System.out.println("----------------Simulated Annealing Ends here--------------------");
         
 //----------------------------------------------------------------------------------
-        //Applying the Simulated Annealing optimization technique
+        //Applying the Ant Colony optimization technique
         System.out.println("----------------Ant Colony Optimization Starts here--------------------");
         AntColonyOptimization aco = new AntColonyOptimization(70,1000,eulerian,bestPath);
         Ant ant = aco.run(eulerian);
